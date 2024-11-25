@@ -1,22 +1,31 @@
 import { useState } from "react";
-
+import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+import { register } from "../API/auth";
 
 function Register () {
     const [Data, setData] = useState ({
         username:"",
         password:"",
-        image: null,
+        image:"",
       });
+
+
+const {mutate}=useMutation({
+  mutationKey:["register"],
+  mutationFn:()=>register(Data),
+  
+})
 
       const handleChange = (e) =>{
         setData({...Data, [e.target.name]: e.target.value});
       };
       const handleFileChange = (e) =>{
-        setData({...Data, image: e.taarget.file[0]})
+        setData({...Data, image: e.target.file[0]})
       };
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(Data)
+        mutate()
       }
       return (
         <form onSubmit={handleSubmit}>
