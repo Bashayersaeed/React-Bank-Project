@@ -24,4 +24,15 @@ const transactions = async () => {
   return data;
 };
 
-export { register, login, profile, transactions };
+const deposit = async (amount) => {
+  const responce = await instance.post("/mini-project/api/transactions/deposit", { amount });
+  return responce.data;
+};
+
+const withdraw = async (amount) => {
+  const responce = await instance.put("/mini-project/api/transactions/withdraw", { amount });
+  return responce.data;
+};
+
+
+export { register, login, profile, transactions, deposit, withdraw };
