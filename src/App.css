@@ -1,0 +1,215 @@
+.Home {
+  background: linear-gradient(0deg, #9c27b0, #3f51b5);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Home-Container {
+  background-color: rgb(254, 239, 255);
+  display: flex;
+  border-radius: 40px;
+  padding: 10% 20%;
+  column-gap: 70px;
+  flex-direction: column;
+}
+
+.Home-Container h1 {
+  color: #651c71;
+  font-family: serif;
+}
+
+.Login-Btn {
+  border: none;
+  margin-top: 20px;
+  border-radius: 40px;
+  padding: 10px 30px;
+  color: #ffffff;
+  font-size: medium;
+  font-weight: bold;
+  font-family: sans-serif;
+  background-color: #7e1f8d;
+}
+
+/* .Register-Btn {
+  border: none;
+  margin-top: 20px;
+  border-radius: 40px;
+  padding: 10px 30px;
+  color: #ffffff;
+  font-size: medium;
+  font-weight: bold;
+  font-family: sans-serif;
+  background-color: #7e1f8d;
+} */
+
+.register-Form {
+  background-color: rgb(254, 239, 255);
+  display: grid;
+  border-radius: 40px;
+  padding: 10%;
+  align-items: center;
+  align-content: space-around;
+  justify-content: space-around;
+  justify-items: center;
+  row-gap: 10px;
+}
+
+.register-Form h1 {
+  color: #651c71;
+  font-family: serif;
+}
+
+.register-Form input {
+  border: snow;
+  border-radius: 40px;
+}
+
+.Register-Container {
+  background: linear-gradient(0deg, #9c27b0, #3f51b5);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Register-Container button {
+  border: none;
+  border-radius: 40px;
+  padding: 10px 30px;
+  color: #ffffff;
+  font-size: medium;
+  font-weight: bold;
+  font-family: sans-serif;
+  background-color: #7e1f8d;
+}
+
+.Login-Form {
+  background-color: rgb(254, 239, 255);
+  display: grid;
+  border-radius: 40px;
+  padding: 7% 10%;
+  align-items: center;
+  align-content: space-around;
+  justify-content: space-around;
+  justify-items: center;
+  row-gap: 10px;
+}
+
+.Login-Container {
+  background: linear-gradient(0deg, #9c27b0, #3f51b5);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Login-Form input {
+  border: snow;
+  border-radius: 40px;
+  width: 160px;
+  height: 30px;
+  text-align: center;
+}
+
+.Login-Form h1,
+h3 {
+  color: #651c71;
+  font-family: serif;
+}
+
+.Profile-Data {
+  align-items: center;
+}
+
+.Link-Btn {
+  border: none;
+  border-radius: 40px;
+  color: #ffffff;
+  font-size: smaller;
+  text-align: center;
+  font-weight: bold;
+  font-family: sans-serif;
+  width: 80px;
+  background-color: #7e1f8d;
+  height: 20px;
+}
+
+.Login-Form h1 {
+  color: #651c71;
+  font-family: serif;
+}
+
+.Profile-Container {
+  background: linear-gradient(0deg, #9c27b0, #3f51b5);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Profile-Form {
+  background-color: rgb(254, 239, 255);
+  display: grid;
+  border-radius: 40px;
+  padding: 7% 10%;
+  align-items: center;
+  align-content: space-around;
+  justify-content: space-around;
+  justify-items: center;
+  row-gap: 10px;
+}
+
+.Profile-Data {
+  display: flex;
+  flex-direction: column;
+}
+
+.Profile-Data h1,
+h4,
+h6 {
+  color: #651c71;
+}
+
+.Upload-Contianer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+}
+
+.Upload-Contianer input {
+  border: solid;
+  border-color: #6d40b3;
+  border-radius: 50px;
+}
+
+.Upload-Contianer button {
+  border: none;
+  border-radius: 50px;
+  color: white;
+  background-color: #7e1f8d;
+}
+
+.Header {
+  display: inline-flex;
+  column-gap: 40px;
+  height: 50px;
+}
+
+.Header .active, a {
+  background-color: #6c41b3;
+  padding: 2px 10px;
+  border-radius: 50px;
+  color: #ffefff;
+  text-decoration: none;
+}
+
+nav {
+  background-color: rgb(254, 239, 255);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  column-gap: 25%;
+}
