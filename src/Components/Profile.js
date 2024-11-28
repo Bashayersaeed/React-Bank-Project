@@ -28,7 +28,7 @@ const Profile = () => {
       <form className="Profile-Form">
         <div className="Profile-Data">
           <h1>{profileData?.username}</h1>
-          <h4>Balance:</h4>
+          <h4>Balance:{profileData?.balance}</h4>
           <h6>Upload a Profile Pic</h6>
           <div className="Upload-Contianer">
             <input

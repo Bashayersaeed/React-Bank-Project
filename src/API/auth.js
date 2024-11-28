@@ -25,7 +25,7 @@ const transactions = async () => {
 };
 
 const deposit = async (amount) => {
-  const responce = await instance.post("/mini-project/api/transactions/deposit", { amount });
+  const responce = await instance.put("/mini-project/api/transactions/deposit", { amount });
   return responce.data;
 };
 
@@ -34,5 +34,10 @@ const withdraw = async (amount) => {
   return responce.data;
 };
 
+const users = async () => {
+  const responce = await instance.get("/mini-project/api/auth/user/<userId>");
+  return responce.data;
+};
 
-export { register, login, profile, transactions, deposit, withdraw };
+
+export { register, login, profile, transactions, deposit, withdraw, users };
