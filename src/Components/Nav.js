@@ -1,7 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { deleteToken } from "../API/storage";
 
 const Nav = () => {
+  const handleSignOut = () => {
+    deleteToken();
+  }
   return (
     <nav>
       <nav></nav>
@@ -12,7 +16,7 @@ const Nav = () => {
         <NavLink to='/Profile'>Profile</NavLink>
       </nav>
       <nav className="Left-Header">
-        <NavLink>SignOut</NavLink>
+        <NavLink to='/' onClick={handleSignOut}>SignOut</NavLink>
       </nav>
     </nav>
   );

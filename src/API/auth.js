@@ -25,19 +25,38 @@ const transactions = async () => {
 };
 
 const deposit = async (amount) => {
-  const responce = await instance.put("/mini-project/api/transactions/deposit", { amount });
-  return responce.data;
+  const response = await instance.put(
+    "/mini-project/api/transactions/deposit",
+    { amount }
+  );
+  return response.data;
 };
 
 const withdraw = async (amount) => {
-  const responce = await instance.put("/mini-project/api/transactions/withdraw", { amount });
-  return responce.data;
+  const response = await instance.put(
+    "/mini-project/api/transactions/withdraw",
+    { amount }
+  );
+  return response.data;
 };
 
 const users = async () => {
-  const responce = await instance.get("/mini-project/api/auth/user/<userId>");
-  return responce.data;
+  const token = localStorage.getItem("token");
+  const data = await instance.get("/mini-project/api/auth/users", {
+    headers: {
+      Authorization: `Bearer ${token}`, 
+    },
+  });
+  return data;
+};
+
+const TransferUsers = async (amount, username) => {
+  const response = await instance.put(
+   `/mini-project/api/transactions/transfer/${username}`,
+    { amount }
+  );
+  return response.data;
 };
 
 
-export { register, login, profile, transactions, deposit, withdraw, users };
+export { register, login, profile, transactions, deposit, withdraw, users, TransferUsers };

@@ -5,14 +5,14 @@ import { useQuery } from "@tanstack/react-query";
 
 const Transactions = () => {
   const [transaction, setTransaction] = useState([]);
-  const [loading, setLaoding] = useState(true);
-  const [error, setError] = useState(null);
 
   const { data, isFetching, isSuccess } = useQuery({
     queryKey: ["Transaction"],
     queryFn: transactions,
   });
-
+  const [searchQuery, setSearchQuery] = useState("");
+  const [applySearch, setApplySearch] = useState(false);
+  const [filteredTransactions, setFilteredTransactions] = useState(data);
   const [filters, setFilters] = useState({
     all: true,
     deposit: false,
@@ -24,9 +24,11 @@ const Transactions = () => {
     from: "",
     to: "",
   });
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
-
     if (checked) {
       setFilters({
         all: false,
@@ -34,13 +36,13 @@ const Transactions = () => {
         withdraw: false,
         transfer: false,
         byDate: false,
+        [name]: true,
       });
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        [name]: checked,
-      }));
     }
+      setApplySearch(false);
+      setSearchQuery("");
   };
+
   const handleDateChange = (event) => {
     const { name, value } = event.target;
     setDateRange((prevRange) => ({
@@ -61,7 +63,37 @@ const Transactions = () => {
     }
   };
 
-  const transList = data?.map((trans) => {
+  const handleSearchClick = () => {
+    setApplySearch(true);
+    const filtered = data?.filter((trans) => {
+      const { type, amount } = trans;
+      const isSearchValid =
+        searchQuery === "" ||
+        amount.toString().includes(searchQuery) ||
+        type.toLowerCase().includes(searchQuery.toLowerCase());
+      return isSearchValid;
+    });
+
+    setFilteredTransactions(filtered);
+  };
+
+  const filtered = data?.filter((trans) => {
+    const { type, createdAt } = trans;
+    const transactionDate = createdAt.split("T")[0];
+
+    const isTypeValid =
+      filters.all ||
+      (filters.deposit && type === "deposit") ||
+      (filters.withdraw && type === "withdraw") ||
+      (filters.transfer && type === "transfer") ||
+      (filters.byDate &&
+        new Date(transactionDate) >= new Date(dateRange.from) &&
+        new Date(transactionDate) <= new Date(dateRange.to));
+
+    return isTypeValid;
+  });
+
+  const transList = filteredTransactions?.map((trans) => {
     const { type, amount, createdAt } = trans;
     const { color } = getStyles(type);
     const dateOnly = createdAt.split("T")[0];
@@ -74,22 +106,50 @@ const Transactions = () => {
     }
 
     return (
-      <div className="Trans-Op" >
-        
-          <div style={{color:color}}>{operation}</div>
-          <div>{dateOnly}</div>
-            <div>{type}</div>
-        
+      <div className="Trans-Op" key={createdAt}>
+        <div className="Operation" style={{ color: color }}>
+          {operation}
+        </div>
+        <div className="Date">{dateOnly}</div>
+        <div className="Type">{type}</div>
       </div>
     );
   });
 
+  const transListByFilter = filtered?.map((trans) => {
+    const { type, amount, createdAt } = trans;
+    const { color } = getStyles(type);
+    const dateOnly = createdAt.split("T")[0];
+    let operation;
+
+    if (type === "deposit") {
+      operation = `+${amount}`;
+    } else {
+      operation = `-${amount}`;
+    }
+
+    return (
+      <div className="Trans-Op" key={createdAt}>
+        <div className="Operation" style={{ color: color }}>
+          {operation}
+        </div>
+        <div className="Date">{dateOnly}</div>
+        <div className="Type">{type}</div>
+      </div>
+    );
+  });
   return (
     <div className="Trans-Page">
       <div className="Trans-Container">
         <div className="Trans-Search-Box">
-          <input type="text" name="Search" placeholder="Search" />
-          <button>Search</button>
+          <input
+            type="text"
+            name="Search"
+            placeholder="Search by Amount or Type"
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+          <button onClick={handleSearchClick}>Search</button>
         </div>
         <div className="Trans-Filter">
           <h4>Filter:</h4>
@@ -101,7 +161,7 @@ const Transactions = () => {
               checked={filters.all}
               onChange={handleCheckboxChange}
             />
-            <span class="checkmark"></span>
+            <span className="checkmark"></span>
           </label>
           <label className="Container-Label">
             Deposit
@@ -158,27 +218,12 @@ const Transactions = () => {
             onChange={handleDateChange}
           />
         </div>
-        <div className="Trans-Details">{transList}</div>
+        <div className="Trans-Details">
+          {!applySearch ? transListByFilter : transList}
+        </div>
       </div>
     </div>
   );
 };
 
 export default Transactions;
-
-// <h1>My Transactions</h1>
-//       <ul>
-//         {data?.map((transaction) => {
-//           const { id, type, amount } = transaction;
-//           const { color, icon } = getStyles(type);
-
-//           return (
-//             <li>
-//               <span>{icon}</span>
-//               <span style={{ color: color }}>
-//                 {type.toUpperCase()}: ${amount}
-//               </span>
-//             </li>
-//           );
-//         })}
-//       </ul>

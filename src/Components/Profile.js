@@ -4,13 +4,12 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { profile } from "../API/auth";
 
 const Profile = () => {
-  const [Data, setData] = useState({
-    username: "",
-    password: "",
-    image: "",
-  });
+  // const [Data, setData] = useState({
+  //   username: "",
+  //   password: "",
+  //   image: "",
+  // });
 
-  // const [profileData, setProfileData] = useState("");
   const {
     data: profileData,
     isFetching,
@@ -20,9 +19,9 @@ const Profile = () => {
     queryFn: profile,
   });
 
-  const handleFileChange = (e) => {
-    setData({ ...Data, image: e.target.file[0] });
-  };
+  // const handleFileChange = (e) => {
+  //   setData({ ...Data, image: e.target.file[0] });
+  // };
   return (
     <div className="Profile-Container">
       <form className="Profile-Form">
@@ -35,7 +34,7 @@ const Profile = () => {
               type="file"
               name="image"
               accept="image/*"
-              onChange={handleFileChange}
+              // onChange={handleFileChange}
             />
             <button type="submit">Save</button>
           </div>
